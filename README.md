@@ -63,7 +63,37 @@ Documentation on how to package Theia as a Desktop Product may be found [here](h
   - `launcher` contains a Theia extension contributing, for AppImage applications, the option to create a script that allows to start the Eclipse Theia IDE from the command line by calling the 'theia' command.
 
 ### Build
+#### 🛠️ Windows Build Prerequisites
 
+To successfully build this project on Windows, you must ensure your environment is set up correctly to compile native C++ modules.
+
+#### 1. Required Software
+* **Node.js:** v22.x (Recommended).
+* **Python:** v3.11.x (⚠️ **Do not use Python 3.13**, it is as of today incompatible with `node-gyp`).
+* **Yarn:** v1 (Classic). Enable via `corepack enable` then `yarn set version classic`.
+
+#### 2. C++ Build Tools (Crucial)
+You must install **Visual Studio 2022** (Community or Build Tools, and you can install Build Tools for free [here](https://my.visualstudio.com/Downloads?q=visual%20studio%202022&wt.mc_id=o~msft~vscom~older-downloads) ) with specific components:
+
+1.  Run the Visual Studio Installer, and modify the 'Visual Studio Build Tools 2022'.
+2.  Select the **"Desktop development with C++"** workload.
+3.  Go to the **"Individual components"** tab.
+4.  Search for and check: **`MSVC v143 - VS 2022 C++ x64/x86 Spectre-mitigated libs`**.
+5.  Install/Modify.
+
+#### 3. Build Instructions
+Do not use standard PowerShell or Git Bash for the build process.
+
+1.  Open the **Developer Command Prompt for VS 2022** (Run as Administrator).
+2.  Navigate to the project directory.
+3.  Run the setup commands:
+    ```cmd
+    yarn install
+    yarn build:dev
+    yarn download:plugins
+    ```
+
+#### Build instructions from the Theia IDE repo
 For development and casual testing of the Eclipse Theia IDE, one can build it in "dev" mode. This permits building the IDE on systems with less resources, like a Raspberry Pi 4B with 4GB of RAM.
 
 ```sh
